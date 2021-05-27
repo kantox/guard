@@ -1,0 +1,26 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+      - master
+      - '*v'
+  pull_request:
+    branches:
+      - '**'
+jobs:
+  test:
+    name: 'Ruby: ${{ matrix.ruby-version }}'
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+       # GHA does not support rubies older than 2.1.9. So we can't test 1.9.3 and 2.0
+       ruby-version: ['2.1.9', '2.2.10', '2.3.8', '2.4.10', '2.5', '2.6', '2.7', '3.0']
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - run: bundle exec rake

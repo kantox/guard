@@ -44,7 +44,7 @@ RSpec.describe Guard::UI::Config do
 
     context "with deprecated options set" do
       context "when set using a string" do
-        subject { described_class.new('time_format': "foo") }
+        subject { described_class.new('time_format' => "foo") }
 
         it "passes deprecated options to logger" do
           expect(Guard::UI::Logger::Config).to receive(:new)

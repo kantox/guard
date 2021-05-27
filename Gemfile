@@ -6,6 +6,8 @@ gemspec unless ENV["USE_INSTALLED_GUARD"] == "1"
 
 gem "rake"
 
+gem 'listen', "< 3.3.0" # Does not have setup ruby version properly and fails in ruby 2.2
+
 # The development group will not be
 # installed on Travis CI.
 
